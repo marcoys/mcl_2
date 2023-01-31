@@ -1,0 +1,217 @@
+.App {
+
+}
+
+html {
+  height: 100%;
+  background: #fff;
+}
+
+.ghanachoco {
+  font-family: 'ghanachoco', sans-serif !important;
+}
+
+header {
+  padding: 15px;
+  background: #bb9757;
+}
+
+header h1 {
+  font-size: 35px;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+header .btn_plus {
+  position: absolute;
+  right: 3%;
+  font-size: 35px;
+  top: 14px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.card {
+  padding: 5%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.card>ul {
+  width: 48%;
+  display: inline-block;
+  margin-right: 3%;
+  margin-bottom: 20px;
+  padding: 3%;
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.card>ul:nth-child(2n) {
+  margin-right: 0;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+
+.card h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 50px;
+  word-break: keep-all;
+}
+
+.card h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.card .btn_prgm {
+  width: 120px;
+  height: 40px;
+  border-radius: 15px;
+  border: 1px solid rgb(131, 111, 244);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.card .btn_prgm:hover {
+  background: rgb(131, 111, 244);
+}
+
+.card .btn_prgm p {
+  text-align: center;
+  line-height: 39px;
+  transition: all 0.3s;
+}
+.card .btn_prgm:hover p {
+  color: #fff;
+}
+
+.card ul::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.card ul li {
+  float: left;
+}
+.card ul li:first-child {
+  width: 40%;
+}
+
+.card ul li:first-child img {
+  width: 100%;
+}
+
+.card ul li:last-child {
+  padding-left: 7%;
+  width: 50%;
+}
+
+
+/* 페이드*/
+.off {transition: opacity 0.2s; opacity: 0;}
+.on {opacity: 1;}
+
+/* 로그인 모달창 */
+.black-bg {width: 100%; height: 100%; background: rgba(0,0,0,0.7); position: fixed; padding: 20px; z-index: 3; box-sizing: border-box;}
+
+.modal_login {background: #fff; max-width: 500px; width: 100%; height: 280px; margin: 0 auto; padding: 30px; box-sizing: border-box; border-radius: 15px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.modal_login span {position: absolute; top: 8px; right: 12px; font-size: 30px; cursor: pointer;}
+.modal_login h5 {font-size: 30px; text-align: center; letter-spacing: -1px; margin-bottom: 30px;}
+.modal_login table {width: 80%; margin: 0 auto;}
+.modal_login table th {text-align: left; padding: 10px 10px 10px 0;}
+.modal_login table td input {width: 100%;}
+.modal_login .btn_login {width: 100%; height: 40px; background: rgb(111, 111, 111); border-radius: 10px; cursor: pointer; margin-top: 30px;}
+.modal_login .btn_login p {color: #fff; text-align: center;
+line-height: 39px;}
+
+/* 프로그램 모달창 */
+.modal_program {background: #fff; z-index: 3; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 600px; width: 94%; padding: 30px 20px; box-sizing: border-box; border-radius: 10px;}
+.modal_program .p_list {width: 100%; margin-bottom: 20px;}
+.modal_program .p_list caption {text-align: left; font-size: 20px; font-weight: 600; margin-bottom: 10px;}
+.modal_program .p_list tr th {text-align: left; width: 120px; padding: 4px 0; border-bottom: 1px solid rgb(217, 217, 217);}
+.modal_program .p_list tr td {text-align: left; border-bottom: 1px solid rgb(217, 217, 217);}
+.modal_program .p_list tr:last-child th, .modal_program .p_list tr:last-child td  {border-bottom: none;} 
+.close_modal {width: 120px; }
+.close_modal {
+  width: 120px;
+  height: 40px;
+  border-radius: 15px;
+  background: rgb(111, 111, 111);
+  border: 1px solid rgb(111, 111, 111);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+.close_modal:hover {
+  background: #fff;
+}
+
+.close_modal p {
+  text-align: center;
+  line-height: 37px;
+  transition: all 0.3s;
+  color: #fff;
+}
+.close_modal:hover p {
+  color: #000;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media ( max-width: 1040px ) {
+  .card h3 {min-height: 51px;}
+}
+
+@media ( max-width: 680px ) {
+  .modal_login {max-width: 350px;}
+
+  header h1 {
+    font-size: 25px;
+  }
+
+  header .btn_plus {
+    font-size: 40px;
+    top: 5px;
+  }
+
+  .card > ul {
+    width: 100%;
+    margin: 40px 0;
+  }
+
+  .card ul li:first-child, .card ul li:last-child {
+    width: 100%;
+  }
+
+  .card h3 {
+    margin-bottom: 15px;
+    
+  }
+}
+
