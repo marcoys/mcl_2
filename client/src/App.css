@@ -7,17 +7,14 @@ html {
   background: #fff;
 }
 
-.ghanachoco {
-  font-family: 'ghanachoco', sans-serif !important;
-}
-
 header {
   padding: 15px;
   background: #bb9757;
 }
 
 header h1 {
-  font-size: 35px;
+  font-family: 'Manse', sans-serif !important;
+  font-size: 3rem;
   letter-spacing: -1px;
   text-align: center;
 }
@@ -116,6 +113,10 @@ header .btn_plus {
   width: 50%;
 }
 
+/* 버튼 */
+.btn-ok {width: 150px; height: 35px; background: rgb(109, 80, 255); border-style: none; border-radius: 3px; color: #fff; cursor: pointer; transition: ease 0.5s;}
+.btn-ok:hover {background: rgb(31, 113, 196);}
+
 
 /* 페이드*/
 .off {transition: opacity 0.2s; opacity: 0;}
@@ -167,6 +168,16 @@ line-height: 39px;}
 .close_modal:hover p {
   color: #000;
 }
+
+/* 추가 페이지 */
+.container {padding: 5%; box-sizing: border-box; width: 100%;}
+.add-wrap h1 {font-size: 1.8rem; font-weight: 600; letter-spacing: -1px; text-align: center;}
+.add-box {max-width: 768px; width: 100%; margin: 0 auto;}
+.add-box .ip-box {display: block; width: 100%; max-width: 500px; margin: 0 auto;}
+.add-box .ip-box h5 {font-size: 1rem; font-weight: 500; text-align: left; margin: 15px 0 5px 0;}
+.add-box .ip-box .ip-wrap {display: block; padding: 10px; border: 1px solid #a3a1a1; border-radius: 5px; box-sizing: border-box;}
+.add-box .ip-box .ip-wrap input {width: 100%; box-sizing:border-box; border: none; outline: none;}
+
 
 
 @media (prefers-reduced-motion: no-preference) {

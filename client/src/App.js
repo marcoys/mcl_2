@@ -34,14 +34,30 @@ function App() {
     setPlayList(false);
   }
 
-  const test = () => {
+  useEffect(() => {
     axios.get('http://localhost:8080/showlist').then((result) => {
-      console.log(result);
+      console.log(result.data);
+      setReadData(result.data)
     })
     .catch(() => {
       console.log('실패')
     })
-  }
+  
+    return () => {
+      
+    }
+  }, [])
+  
+
+  // const test = () => {
+  //   axios.get('http://localhost:8080/showlist').then((result) => {
+  //     console.log(result);
+  //     setReadData(result)
+  //   })
+  //   .catch(() => {
+  //     console.log('실패')
+  //   })
+  // }
 
   return (
       <div className="App notosanskr">
@@ -54,7 +70,7 @@ function App() {
           playList === true ? <Playlist open={openModal2} close={closeModal2} onoff={playList} /> : null
         }
         <header>
-          <h1 className='ghanachoco' onClick={() => {navigate('/')}}>My Classic List</h1>
+          <h1 onClick={() => {navigate('/')}}>My Classic List</h1>
           <FontAwesomeIcon icon={faPlus} className='btn_plus' onClick={ openModal }/>
         </header>
 
@@ -62,7 +78,7 @@ function App() {
           <Route path='/' element={
             <div className='card'>
               {
-                cardData.map((a, i) => {
+                readData.map((a, i) => {
                   return (
                     <ul key={i}>
                       <li>
@@ -71,8 +87,8 @@ function App() {
                       <li>
                         <h2>2020-11-13 7:30PM</h2>
                         <h3>{a.artist}</h3>
-                        <h4>{cardData[i].location}</h4>
-                        <h4>{cardData[i].seat}석 {cardData[i].price}만원</h4>
+                        <h4>{readData[i].location}</h4>
+                        <h4>{readData[i].seat}석 {readData[i].price}만원</h4>
                         <div className='btn_prgm' onClick={openModal2}><p>프로그램</p></div>
                       </li>
                     </ul>
