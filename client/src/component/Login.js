@@ -21,7 +21,6 @@ function Login(props) {
 
   return (
     <div className={'off ' + on}>
-      <div className="black-bg">
         <div className="modal_login">
           <span onClick={props.close}>x</span>
           <h5>LOG IN</h5>
@@ -54,7 +53,6 @@ function Login(props) {
           
         </div>
       </div>
-    </div>
   );
 }
 

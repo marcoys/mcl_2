@@ -5,7 +5,8 @@ function Playlist(props) {
 
   useEffect(() => {
     if(props.onoff == true ) {
-      setOn('on')
+      setOn('on');
+      
     }
   
     return () => {
@@ -16,7 +17,6 @@ function Playlist(props) {
 
   return (
     <div className={'off ' + on}>
-      <div className='black-bg'></div>
       <div className='modal_program'>
         <table className="p_list">
           <caption>프로그램</caption>
