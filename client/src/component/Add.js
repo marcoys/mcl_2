@@ -3,6 +3,9 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus, faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import AddInput from './AddInput';
 
 
 function Add() {
@@ -10,6 +13,7 @@ function Add() {
   const [ time, setTime ] = useState(new Date());
   const [ imgFile, setImgFile ] = useState('');
   const [ imgUrl, setImgUrl ] = useState('');
+  const [ addOpt, setAddOpt ] = useState(['prgtitle', 'anctitle']);
 
   function handleFileOnChange (e) {
     e.preventDefault();
@@ -22,17 +26,31 @@ function Add() {
     reader.readAsDataURL(file);
   }
 
-  let poster_preview = null;
+  function handleBtnNext () {
+    document.querySelector('.btn-next').style.display = 'none'
+    document.querySelector('.add-info').setAttribute('style', 'visibility: hidden; position: absolute;');
+    document.querySelector('.add-program').setAttribute('style', 'left: 50%; opacity: 1;')
+  }
+
+  function handleBtnPrev () {
+    document.querySelector('.btn-next').style.display = 'block'
+    document.querySelector('.add-info').setAttribute('style', 'visibility: visible; position: relative;')
+    document.querySelector('.add-program').setAttribute('style', 'opacity: 0; visibility: hidden;')
+  }
+
+
+
+  let poster_preview = <img className='poster_preview' src='/images/noimage.gif'></img>;
   if(imgFile !== '') {
     poster_preview = <img className='poster_preview' src={imgUrl}></img>
-  }
+  } 
 
   return (
     <div className='container add-wrap'>
       <form action="/addshow" method='POST' encType="multipart/form-data" >
-        <h1>공연 추가하기</h1>
-        <div className='add-box'>
-          
+        
+        <div className='add-box add-info'>
+          <h1>공연 추가</h1>
           <span className="ip-box">
             <h5>연주자</h5>
             <span className='ip-wrap'>
@@ -101,10 +119,24 @@ function Add() {
             {poster_preview}
           </span>
 
-          <button type='submit' className='btn-submit'>다음</button>
-
-          <p>다음으로 넘기면 리스트 추가 페이지</p>
+          <div className='btn-next' onClick={handleBtnNext}>다음 <FontAwesomeIcon icon={faArrowRight} /></div>
         </div>
+
+        <div className='add-box add-program'>
+            <h1>프로그램 추가</h1>
+            <h5>- 프로그램</h5>
+            <ul>
+              <AddInput addOpt={addOpt[0]}/>
+            </ul>
+            <h5>- 앙코르</h5>
+            <ul>
+              <AddInput addOpt={addOpt[1]}/>
+            </ul>
+
+            <div className='btn-next' onClick={handleBtnPrev}>이전 <FontAwesomeIcon icon={faArrowLeft} /></div>
+
+            <button type='submit' className='btn-submit'>등록</button>
+          </div>
       </form>
     </div>
   )

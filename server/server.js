@@ -27,7 +27,7 @@ var storage = multer.diskStorage({
     cb(null, '../client/public/images')
   },
   filename : function(req, file, cb) {
-    cb(null, file.originalname)
+    cb(null, file.originalname);
   }
 });
 
@@ -60,18 +60,20 @@ app.get('/showlist', function(req, res) {
 });
 
 app.post('/addshow', upload.single('poster'), function(req, res) {
-  console.log('re');
+
   const artist = req.body.artist;
   const location = req.body.location;
   const date = req.body.date;
   const time = req.body.time;
   const seat = req.body.seat;
   const price = req.body.price;
-  const poster = req.file.filename;
+  const poster = req.file == undefined ? 'noimage.gif' : req.file.filename; // 디폴트 이미지 설정
+  const program = req.body.prgtitle;
+  const anchor = req.body.anctitle;
   
   db.collection('counter').findOne({name: '게시물갯수'}, function(err, result) {
     const totalCount = result.totalCount;
-    const addData = { _id: totalCount + 1, artist: artist, location: location, date: date, time: time, seat: seat, price: price, poster: poster }
+    const addData = { _id: totalCount + 1, artist: artist, location: location, date: date, time: time, seat: seat, price: price, poster: poster, program: program, anchor: anchor }
 
     db.collection('showlist').insertOne(addData, function(err, res) {
       db.collection('counter').updateOne({name: '게시물갯수'}, { $inc: {totalCount: 1}}, function(err, res) {

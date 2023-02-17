@@ -9,7 +9,7 @@ import Login from './component/Login.js';
 import Add from './component/Add.js';
 import Playlist from './component/Playlist.js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   let [ mdLogin, setMdLogin ] = useState(false);
@@ -65,7 +65,7 @@ function App() {
 
         <header>
           <h1 onClick={() => {navigate('/')}}>My Classic List</h1>
-          <FontAwesomeIcon icon={faPlus} className='btn_plus' onClick={() => {navigate('/add')}}/>
+          <FontAwesomeIcon icon={faSquarePlus} className='btn_plus' onClick={() => {navigate('/add')}}/>
         </header>
 
         <Routes>
