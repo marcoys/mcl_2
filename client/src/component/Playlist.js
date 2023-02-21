@@ -1,61 +1,50 @@
 import React, { useEffect, useState } from 'react';
 
-function Playlist(props) {
-  let [ on, setOn ] = useState('');
-
-  useEffect(() => {
-    if(props.onoff == true ) {
-      setOn('on');
-      
-    }
-  
-    return () => {
-      
-    }
-  }, [])
-  
+function Playlist({ program, anchor, id, modalVisibleId ,setModalVisibleId }) {
+  const closeModal = () => {
+    setModalVisibleId('')
+  }
 
   return (
-    <div className={'off ' + on}>
-      <div className='modal_program'>
+    <>
+      <div className={modalVisibleId === id ? 'black-bg mdon' : 'black-bg'} ></div>
+      <div className={modalVisibleId === id ? 'modal_program on' : 'modal_program off' } >
         <table className="p_list">
           <caption>프로그램</caption>
           <tbody>
-            <tr>
-              <th>슈만</th>
-              <td>유모레스크 Op.20</td>
-            </tr>
-            <tr>
-              <th>시마노프스키</th>
-              <td>마스크 Op.34</td>
-            </tr>
-            <tr>
-              <th>리스트</th>
-              <td>피아노 소나타 b단조 S.178</td>
-            </tr>
-          </tbody>
+              {
+                program.artist && program.artist.map((a, i) => {
+                  return (
+                    <tr key={i}>
+                      <th>{program.artist[i]}</th>
+                      <td>{program.title[i]}</td>
+                    </tr>
+                  )
+                })
+              }
+            </tbody>
         </table>
 
         <table className="p_list">
           <caption>앙코르</caption>
           <tbody>
-            <tr>
-              <th>차이코프스키</th>
-              <td>10월</td>
-            </tr>
-            <tr>
-              <th>쇼팽</th>
-              <td>스케르초 3번</td>
-            </tr>
-            <tr>
-              <th>리스트</th>
-              <td>위안 3번</td>
-            </tr>
+            {
+                anchor.artist && anchor.artist.map((a, i) => {
+                  return (
+                    <tr key={i}>
+                      <th>{anchor.artist[i]}</th>
+                      <td>{anchor.title[i]}</td>
+                    </tr>
+                  )
+                })
+              }
           </tbody>
         </table>
-        <div className='close_modal' onClick={props.close}><p>닫기</p></div>
+        <div className="close_modal" onClick={closeModal}>
+          <p>닫기</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

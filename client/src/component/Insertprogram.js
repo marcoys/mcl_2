@@ -4,21 +4,27 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useCallback } from 'react';
 
 function Insertprogram({ onInsert }) {
+  const [ artist, setArtist ] = useState('');
   const [ value, setValue ] = useState('');
 
-  const onChange = useCallback( e => {
+  const onChange1 = useCallback( e => {
+    setArtist(e.target.value);
+  }, [])
+  const onChange2 = useCallback( e => {
     setValue(e.target.value);
   }, [])
 
   const setInsert = useCallback(e => {
-    onInsert(value);
-    setValue('')
-  }, [onInsert, value])
+    onInsert(artist, value);
+    setArtist('');
+    setValue('');
+  }, [onInsert, artist, value])
 
   return (
     <>
       <li className="ip-box">
-        <input className='input-txt' type="text" name="insertTitle" id='add-input' value={value} onChange={onChange} />
+        <input type="text" value={artist} onChange={onChange1} />
+        <input className='input-txt' type="text" name="insertTitle" id='add-input' value={value} onChange={onChange2} />
         <FontAwesomeIcon icon={faCirclePlus} className="ip-plus prg-plus" onClick={setInsert}/>
       </li>
     </>

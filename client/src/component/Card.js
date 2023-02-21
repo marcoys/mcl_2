@@ -1,49 +1,46 @@
-import React from 'react';
-import Playlist from '../pages/Playlist.js';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import Playlist from './Playlist';
 
-function Card() {
+function Card({ show, playList }) {
+  const [ program, setProgram ] = useState(show.program);
+  const [ anchor, setAnchor ] = useState(show.anchor);
+  const [ id, setId ] = useState(show._id);
+  const [ modalVisibleId, setModalVisibleId ] = useState('');
+
+  const onModalHandler = (id) => {
+    setModalVisibleId(id);
+    console.log(modalVisibleId)
+  }
+
+  
   return (
-    <div className='card'>
+    <>
       <ul>
-        <li>
-          <img src={`${process.env.PUBLIC_URL}/images/chosungjin.jpg`} alt="" />
+        <li style={{
+            background: `url(${process.env.PUBLIC_URL}/images/${show.poster})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
         </li>
         <li>
-          <h2>2020-11-13 7:30PM</h2>
-          <h3>조성진</h3>
-          <h4>성남아트센터</h4>
-          <h4>R석 9만원</h4>
-          <div className='btn_prgm'><p>프로그램</p></div>
+          <h2>
+            {show.date} {show.time}
+          </h2>
+          <h3>{show.artist}</h3>
+          <h4>{show.location}</h4>
+          <h4>
+            {show.seat}석 {show.price}만원
+          </h4>
+          <div className="btn_prgm" onClick={() => onModalHandler(show._id)}>
+            <p>프로그램</p>
+          </div>
         </li>
       </ul>
-
-      <ul>
-        <li>
-          <img src={`${process.env.PUBLIC_URL}/images/chosungjin.jpg`} alt="" />
-        </li>
-        <li>
-          <h2>2020-11-13 7:30PM</h2>
-          <h3>조성진</h3>
-          <h4>성남아트센터</h4>
-          <h4>R석 9만원</h4>
-          <div className='btn_prgm'><p>프로그램</p></div>
-        </li>
-      </ul>
-
-      <ul>
-        <li>
-          <img src={`${process.env.PUBLIC_URL}/images/chosungjin.jpg`} alt="" />
-        </li>
-        <li>
-          <h2>2020-11-13 7:30PM</h2>
-          <h3>조성진</h3>
-          <h4>성남아트센터</h4>
-          <h4>R석 9만원</h4>
-          <div className='btn_prgm'><p>프로그램</p></div>
-        </li>
-      </ul>
-    </div>
-  )
+      <Playlist program={program} anchor={anchor} id={id} modalVisibleId={modalVisibleId} setModalVisibleId={setModalVisibleId} />
+    </>
+  );
 }
 
 export default Card

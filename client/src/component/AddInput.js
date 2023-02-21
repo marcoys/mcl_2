@@ -8,6 +8,7 @@ function createProgram() {
   for ( let i = 0; i <= totalNumber - 1; i++ ) {
     array.push({
       id: i,
+      artist: '',
       title: `제목 ${i}`
     });
   }
@@ -19,9 +20,10 @@ function AddInput({addOpt}) {
 
   let nextId = useRef(0);
 
-  const onInsert = useCallback(title => {
+  const onInsert = useCallback((artist ,title) => {
     let program = {
       id: nextId.current,
+      artist,
       title
     }
     setPrograms(programs.concat(program));

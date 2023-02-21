@@ -13,7 +13,7 @@ function Add() {
   const [ time, setTime ] = useState(new Date());
   const [ imgFile, setImgFile ] = useState('');
   const [ imgUrl, setImgUrl ] = useState('');
-  const [ addOpt, setAddOpt ] = useState(['prgtitle', 'anctitle']);
+  const [ addOpt, setAddOpt ] = useState(['program', 'anchor']);
 
   function handleFileOnChange (e) {
     e.preventDefault();
