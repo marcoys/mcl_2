@@ -68,8 +68,8 @@ app.post('/addshow', upload.single('poster'), function(req, res) {
   const seat = req.body.seat;
   const price = req.body.price;
   const poster = req.file == undefined ? 'noimage.gif' : req.file.filename; // 디폴트 이미지 설정
-  const program = req.body.prgtitle;
-  const anchor = req.body.anctitle;
+  const program = {artist: req.body.programArtist, title: req.body.programTitle};
+  const anchor = {artist: req.body.anchorArtist, title: req.body.anchorTitle};
   
   db.collection('counter').findOne({name: '게시물갯수'}, function(err, result) {
     const totalCount = result.totalCount;
