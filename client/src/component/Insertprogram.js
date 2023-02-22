@@ -23,8 +23,8 @@ function Insertprogram({ onInsert }) {
   return (
     <>
       <li className="ip-box">
-        <input type="text" value={artist} onChange={onChange1} />
-        <input className='input-txt' type="text" name="insertTitle" id='add-input' value={value} onChange={onChange2} />
+        <input type="text" value={artist} onChange={onChange1} placeholder={'연주자'} />
+        <input className='input-txt' type="text" name="insertTitle" id='add-input' value={value} onChange={onChange2} placeholder={'곡명'} />
         <FontAwesomeIcon icon={faCirclePlus} className="ip-plus prg-plus" onClick={setInsert}/>
       </li>
     </>

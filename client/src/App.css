@@ -129,7 +129,7 @@ header .btn_plus {
 .on {visibility: visible; opacity: 1; transition: all 0.2s;}
 
 /* 로그인 모달창 */
-.black-bg {width: 100%; height: 100%; background: rgba(0,0,0,0.7); position: absolute; top: 0; left: 0; padding: 20px; z-index: 2; box-sizing: border-box; visibility: hidden; transition: all 0.8s; opacity: 0;}
+.black-bg {width: 100%; height: 100%; background: rgba(0,0,0,0.7); position: absolute; top: 0; left: 0; padding: 20px; z-index: 2; box-sizing: border-box; visibility: hidden; transition: all 0.5s; opacity: 0;}
 .mdon {visibility: visible; opacity: 1;}
 
 .modal_login {background: #fff; max-width: 500px; width: 100%; height: 280px; margin: 0 auto; padding: 30px; box-sizing: border-box; border-radius: 15px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3;}
@@ -187,12 +187,11 @@ line-height: 39px;}
 .add-box .ip-box .ip-wrap {display: block; padding: 10px; border: 1px solid #a3a1a1; border-radius: 5px; box-sizing: border-box;}
 .add-box .ip-box .ip-wrap input {width: 100%; box-sizing:border-box; border: none; outline: none;}
 .poster_preview {width: 200px; height: auto; display: block; padding: 10px 0;}
-/* .add-program {background: #fff; position: absolute;  max-width: 768px; width: 100%; top: 22%; left: 150%; transition: opacity 0.4s; transform: translate(-50%, -50%); opacity: 0; padding: 40px; box-sizing: border-box; margin-top: 40px;} */
 .add-program {background: #fff; max-width: 768px; width: 100%; transition: opacity 0.4s; opacity: 0; box-sizing: border-box; }
 .add-program h5 {max-width: 500px; margin: 0 auto;}
 .add-program ul {margin-bottom: 20px;}
 .add-program ul li {padding: 5px; width: 100%;}
-.add-program ul li input {border: none; border-bottom: 1px solid #a3a1a1; outline: none; width: 92%; margin-right: 2%;}
+.add-program ul li input {border: none; border-bottom: 1px solid #a3a1a1; outline: none; width: 90%; margin-right: 2%; padding-left: 10px;}
 .add-program ul li .ip-plus {display: inline-block; cursor: pointer;}
 
 

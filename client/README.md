@@ -78,3 +78,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### npm i @fortawesome/free-solid-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-brands-svg-icons
 ### npm i @fortawesome/react-fontawesome
 ### npm install react-datepicker --save
+### npm i styled-components

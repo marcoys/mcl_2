@@ -2,57 +2,57 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-function Login(props) {
-  let [ on, setOn ] = useState('');
+function Login({ mdLogin, setMdLogin}) {
+  const [ mdon, setMdon ] = useState('');
+  const closeModal = () => {
+    setMdLogin('false');
+  }
 
   useEffect(() => {
-    if(props.onoff == true ) {
-      setOn('on')
+    if(mdLogin) {
+      setTimeout(() => {
+        setMdon('mdon')
+      }, 100)
     }
   
     return () => {
-      
     }
-  }, [])
-
-  const loginFunc = (e) => {
-    e.preventDefault();
-  }
+  }, [mdLogin])
 
   return (
-    <div className={'off ' + on}>
-        <div className="modal_login">
-          <span onClick={props.close}>x</span>
-          <h5>LOG IN</h5>
-          <form onSubmit={loginFunc}>
-            <table>
-              <tbody>
-                <tr>
-                  <th>
-                    <p>아이디</p>
-                  </th>
-                  <td>
-                    <input type="text" />
-                  </td>
-                </tr>
-                <tr>
-                  <th>
-                    <p>비밀번호</p>
-                  </th>
-                  <td>
-                    <input type="password" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <>
+      <div className={mdLogin ? `black-bg ${mdon}` : 'black-bg'} ></div>
+      <div className="modal_login">
+        <span onClick={closeModal}>x</span>
+        <h5>LOG IN</h5>
+        <form>
+          <table>
+            <tbody>
+              <tr>
+                <th>
+                  <p>아이디</p>
+                </th>
+                <td>
+                  <input type="text" />
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <p>비밀번호</p>
+                </th>
+                <td>
+                  <input type="password" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-            <button className="btn_login" type='submit' >
-              <p>로그인</p>
-            </button>
-          </form>
-          
-        </div>
+          <button className="btn_login" type="submit">
+            <p>로그인</p>
+          </button>
+        </form>
       </div>
+    </>
   );
 }
 

@@ -15,31 +15,12 @@ function App() {
   let [ mdLogin, setMdLogin ] = useState(false);
   let [ playList, setPlayList ] = useState(false);
   let [ readData, setReadData ] = useState([]);
-  let [ blBg, setBlBg ] = useState('');
   
   let navigate = useNavigate();
 
-
-  // const openModal = () => {
-  //   setBlBg('mdon');
-  //   setMdLogin(true);
-  //   document.querySelector('body').style.overflow = 'hidden';
-  // }
-  // const closeModal = () => {
-  //   setBlBg('');
-  //   setMdLogin(false);
-  //   document.querySelector('body').style.overflow = '';
-  // }
-  // const openModal2 = () => {
-  //   setBlBg('mdon');
-  //   setPlayList(true);
-  //   document.querySelector('body').style.overflow = 'hidden';
-  // }
-  // const closeModal2 = () => {
-  //   setBlBg('');
-  //   setPlayList(false);
-  //   document.querySelector('body').style.overflow = '';
-  // }
+  const openLoginModal= () => {
+    setMdLogin(true);
+  }
 
   useEffect(() => {
     axios.get('http://localhost:8080/showlist').then((result) => {
@@ -57,15 +38,15 @@ function App() {
 
   return (
       <div className="App notosanskr">
-        {/* <div className={`black-bg `+blBg} /> */}
-        
-        {/* {
-          mdLogin === true ? <Login open={openModal} close={closeModal}  onoff={mdLogin} /> : null
-        } */}
+
+        {
+          mdLogin === true ? <Login mdLogin={mdLogin} setMdLogin={setMdLogin} /> : null
+        }
 
         <header>
           <h1 onClick={() => {navigate('/')}}>My Classic List</h1>
-          <FontAwesomeIcon icon={faSquarePlus} className='btn_plus' onClick={() => {navigate('/add')}}/>
+          {/* <FontAwesomeIcon icon={faSquarePlus} className='btn_plus' onClick={() => {navigate('/add')}}/> */}
+          <FontAwesomeIcon icon={faSquarePlus} className='btn_plus' onClick={openLoginModal}/>
         </header>
 
         <Routes>
