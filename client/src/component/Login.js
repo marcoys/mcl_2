@@ -4,9 +4,6 @@ import axios from 'axios';
 
 function Login({ mdLogin, setMdLogin}) {
   const [ mdon, setMdon ] = useState('');
-  const closeModal = () => {
-    setMdLogin('false');
-  }
 
   useEffect(() => {
     if(mdLogin) {
@@ -19,13 +16,17 @@ function Login({ mdLogin, setMdLogin}) {
     }
   }, [mdLogin])
 
+  const closeModal = () => {
+    setMdLogin('false');
+  }
+
   return (
     <>
       <div className={mdLogin ? `black-bg ${mdon}` : 'black-bg'} ></div>
       <div className="modal_login">
         <span onClick={closeModal}>x</span>
         <h5>LOG IN</h5>
-        <form>
+        <form action='/login' method='POST'>
           <table>
             <tbody>
               <tr>
@@ -33,7 +34,7 @@ function Login({ mdLogin, setMdLogin}) {
                   <p>아이디</p>
                 </th>
                 <td>
-                  <input type="text" />
+                  <input type="text" name='id' />
                 </td>
               </tr>
               <tr>
@@ -41,7 +42,7 @@ function Login({ mdLogin, setMdLogin}) {
                   <p>비밀번호</p>
                 </th>
                 <td>
-                  <input type="password" />
+                  <input type="password" name='pw' />
                 </td>
               </tr>
             </tbody>

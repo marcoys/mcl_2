@@ -43,6 +43,7 @@ header .btn_plus {
   border: 1px solid #000;
   border-radius: 10px;
   box-sizing: border-box;
+  position: relative;
 }
 .card>ul:nth-child(2n) {
   margin-right: 0;
@@ -67,30 +68,6 @@ header .btn_plus {
   margin-bottom: 5px;
 }
 
-.card .btn_prgm {
-  width: 120px;
-  height: 40px;
-  border-radius: 15px;
-  border: 1px solid rgb(131, 111, 244);
-  box-sizing: border-box;
-  transition: all 0.3s;
-  cursor: pointer;
-  margin: 0 auto;
-  margin-top: 30px;
-}
-.card .btn_prgm:hover {
-  background: rgb(131, 111, 244);
-}
-
-.card .btn_prgm p {
-  text-align: center;
-  line-height: 39px;
-  transition: all 0.3s;
-}
-.card .btn_prgm:hover p {
-  color: #fff;
-}
-
 .card ul::after {
   display: block;
   clear: both;
@@ -113,12 +90,31 @@ header .btn_plus {
 }
 
 .card ul li:last-child {
-  padding-left: 7%;
   width: 50%;
   box-sizing: border-box;
 }
+.text-box {padding-left: 7%;}
 
 /* 버튼 */
+.btn-box {display: flex; flex-direction: row; justify-content: center; margin-top: 40px;}
+.card .btn_prgm, .card .btn_mody {
+  width: 120px;
+  height: 40px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+.btn_list_delete {font-size: 35px; color: #be0012; background: #fff; border-radius: 20px; cursor: pointer; margin: 18px;}
+.card .btn_prgm {border: 1px solid rgb(131, 111, 244);}
+.card .btn_mody {border: 1px solid rgb(87, 193, 195);}
+.card .btn_prgm:hover {border: none; background-color: rgb(131, 111, 244); color: #fff;}
+.card .btn_mody:hover {border: none; background-color: rgb(44, 148, 149); color: #fff;}
+
 .btn-submit, .btn-next {display: block; width: 150px; height: 35px; background: rgb(109, 80, 255); border-style: none; border-radius: 3px; color: #fff; cursor: pointer; transition: ease 0.5s; margin: 0 auto; margin-top: 40px; font-size: 0.8rem; text-align: center; line-height: 30px;}
 .btn-submit {background: rgb(29, 37, 123);}
 .btn-submit:hover {background: rgb(31, 113, 196);}
@@ -191,7 +187,7 @@ line-height: 39px;}
 .add-program h5 {max-width: 500px; margin: 0 auto;}
 .add-program ul {margin-bottom: 20px;}
 .add-program ul li {padding: 5px; width: 100%;}
-.add-program ul li input {border: none; border-bottom: 1px solid #a3a1a1; outline: none; width: 90%; margin-right: 2%; padding-left: 10px;}
+.add-program ul li input {border: none; border-bottom: 1px solid #a3a1a1; outline: none; width: 87%; margin-right: 2%; padding-left: 10px;}
 .add-program ul li .ip-plus {display: inline-block; cursor: pointer;}
 
 
@@ -222,8 +218,8 @@ line-height: 39px;}
   }
 
   header .btn_plus {
-    font-size: 40px;
-    top: 5px;
+    font-size: 30px;
+    top: 11px;
   }
 
   .card > ul {

@@ -45,7 +45,63 @@ var upload = multer({
   }
 })
 
-//
+// 로그인
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+
+app.use(session({secret : '비밀코드', resave : true, saveUninitialized : false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.post('/login', passport.authenticate('local', {
+  failureRedirect : '/fail',
+  failureMessage: true
+}), function(req, resp) {
+  resp.redirect('/');
+});
+
+passport.use(new LocalStrategy({
+  usernameField: 'id',
+  passwordField: 'pw',
+  session: true,
+  passReqToCallback: false,
+}, function (insertId, insertPw, done) {
+  //console.log(insertId, insertPw);
+  db.collection('user').findOne({ id: insertId }, function (err, res) {
+    if (err) return done(err)
+
+    if (!res) return done(null, false, { message: '존재하지않는 아이디요' })
+    if (insertPw == res.pw) {
+      return done(null, res)
+    } else {
+      return done(null, false, { message: '비번틀렸어요' })
+    }
+  })
+}));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  done(null, {});
+});
+
+app.get('/logincheck', 로그인했니, function(req, res) {
+  res.send('login')
+});
+
+// 로그인여부 미들웨어 작동 후, 서버에서 클라이언트로 로그인 유무값만 전송
+
+function 로그인했니(req, res, next) {
+  if(req.user) {
+    next()
+  } else {
+    res.send('로그인하세요');
+  }
+}
+
 
 
 app.get('/', function(req, res) {
@@ -89,6 +145,12 @@ app.get('/images/:imageName', function(req, res) {
   res.sendFile(__dirname + '/images/' + req.params.imageName)
 })
 
+app.delete('/delete', function(req, res) {
+  db.collection('showlist').deleteOne({ _id: parseInt(req.body._id) }, function(err, res) {
+    console.log('삭제완료');
+  })
+  res.send();
+})
 
 // 리액트 라우팅 전권
 app.get('*', function (req, res) {
