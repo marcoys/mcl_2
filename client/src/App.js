@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import logo from './logo.svg';
 import './asset/css/reset.css';
 import './asset/css/font.css'
@@ -9,13 +9,17 @@ import Login from './component/Login.js';
 import Add from './component/Add.js';
 import Card from './component/Card';
 import Fail from './component/Fail';
+import Edit from './component/Edit'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import Search from './component/Search';
 
 function App() {
   let [ mdLogin, setMdLogin ] = useState(false);
   let [ readData, setReadData ] = useState([]);
   let [ login, setLogin ] = useState(false);
+  let [ search, setSearch ] = useState('');
+  let [ searchResult, setSearchResult ] = useState([]);
   
   let navigate = useNavigate();
 
@@ -49,7 +53,6 @@ function App() {
       console.log('로딩실패')
     }
   }, [])
-  
 
   return (
       <div className="App notosanskr">
@@ -71,19 +74,49 @@ function App() {
 
         <Routes>
           <Route path='/' element={
-            <div className='card'>
-              {
-                [...readData].slice(0).reverse().map((show, i) => {
-                  return (
-                    <Card show={show} key={show._id} login={login} />
-                  )
-                })
-              }
-            </div>
+            <>
+              <span className='main-sc-box'>
+                <span className='ip-wrap'>
+                  <input type="text" id='search-box' onChange={(e) => {
+                    setSearch(e.target.value); 
+                    }} />
+                  <button id='search' onClick={() => {
+                    axios.get(`/search?value=${search}`).then((result) => {
+                      console.log(result.data);
+                      console.log(search.length)
+                      if(search.length <= 1) {
+                        alert('검색어를 두 글자 이상 입력하세요')
+                        return false;
+                      }
+                      if(result.data){
+                        setSearchResult(result.data);
+                        navigate(`/search?value=${search}`);
+                      } else {
+                        alert('검색 결과 없음')
+                        return false;
+                      }
+                      
+                    }).catch(() => {
+                      console.log('실패')
+                    })}}>검색</button>
+                </span>
+              </span>
+              <div className='card'>
+                {
+                  [...readData].slice(0).reverse().map((show, i) => {
+                    return (
+                      <Card show={show} key={show._id} login={login} />
+                    )
+                  })
+                }
+              </div>
+            </>
           } />
 
           <Route path='/add' element={<Add />} />
           <Route path='/fail' element={<Fail />} />
+          <Route path='/edit/:id' element={<Edit readData={readData} />} />
+          <Route path='/search' element={<Search login={login} searchResult={searchResult}  />} />
         </Routes>
       
       </div>

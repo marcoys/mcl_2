@@ -7,9 +7,9 @@ function InsertListItem({ program, onRemove, addOpt }) {
 
   return (
     <>
-      <li className="ip-box" id={id}>
-        <input className='input-txt' type="text" name={addOpt+'Artist'} defaultValue={artist} readOnly />
-        <input className='input-txt' type="text" name={addOpt+'Title'} defaultValue={title} readOnly />
+      <li className="ip-box" id={id} key={id}>
+        <input className='input-txt' type="text" name={addOpt+'Artist[]'} defaultValue={artist} readOnly />
+        <input className='input-txt' type="text" name={addOpt+'Title[]'} defaultValue={title} readOnly />
         <FontAwesomeIcon icon={faCircleMinus} className="ip-plus prg-plus" onClick={() => onRemove(id)} />
       </li>
     </>

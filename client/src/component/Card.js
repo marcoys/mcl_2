@@ -4,12 +4,20 @@ import Playlist from './Playlist';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Card({ show, login }) {
+  const [ fade, setFade ] = useState('');
   const [ program, setProgram ] = useState(show.program);
   const [ anchor, setAnchor ] = useState(show.anchor);
   const [ id, setId ] = useState(show._id);
   const [ modalVisibleId, setModalVisibleId ] = useState('');
+
+  useEffect(() => {
+    setFade('end');
+
+  }, [])
+  
 
   const onModalHandler = (id) => {
     setModalVisibleId(id);
@@ -31,11 +39,13 @@ function Card({ show, login }) {
       console.log(err)
     })
   }
+
+  let navigate = useNavigate();
   
   return (
     <>
       
-      <ul>
+      <ul className={`start ${fade}`}>
         <li style={{
             background: `url(${process.env.PUBLIC_URL}/images/${show.poster})`,
             backgroundSize: 'cover',
@@ -64,7 +74,7 @@ function Card({ show, login }) {
               프로그램
             </div>
             {
-              login ? <div className='btn_mody'>수정</div> : null
+              login ? <div className='btn_mody' onClick={() => {navigate(`/edit/${show._id}`); }}>수정</div> : null
             }
             {/* 수정기능 추가하기 */}
           </div>

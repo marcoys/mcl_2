@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 let multer = require('multer');
 app.use(express.json());
 var cors = require('cors');
@@ -49,6 +51,7 @@ var upload = multer({
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
+const { randomBytes } = require('crypto');
 
 app.use(session({secret : '비밀코드', resave : true, saveUninitialized : false }));
 app.use(passport.initialize());
@@ -110,13 +113,31 @@ app.get('/', function(req, res) {
 
 app.get('/showlist', function(req, res) {
   db.collection('showlist').find().toArray((err, result) => {
-    console.log(result);
+    // console.log(result);
+    res.send(result)
+  })
+});
+
+app.get('/search', (req, res) => {
+  let searchRule = [
+    {
+      $search: {
+        index: 'artistSearch',
+        text: {
+          query: req.query.value,
+          path: "artist"
+        }
+      }
+    },
+    { $sort : { _id : -1 }}
+  ]
+  console.log(req.query);
+  db.collection('showlist').aggregate(searchRule).toArray((err, result) => {
     res.send(result)
   })
 });
 
 app.post('/addshow', upload.single('poster'), function(req, res) {
-
   const artist = req.body.artist;
   const location = req.body.location;
   const date = req.body.date;
@@ -126,11 +147,13 @@ app.post('/addshow', upload.single('poster'), function(req, res) {
   const poster = req.file == undefined ? 'noimage.gif' : req.file.filename; // 디폴트 이미지 설정
   const program = {artist: req.body.programArtist, title: req.body.programTitle};
   const anchor = {artist: req.body.anchorArtist, title: req.body.anchorTitle};
+
+  console.log(req.file)
   
   db.collection('counter').findOne({name: '게시물갯수'}, function(err, result) {
     const totalCount = result.totalCount;
     const addData = { _id: totalCount + 1, artist: artist, location: location, date: date, time: time, seat: seat, price: price, poster: poster, program: program, anchor: anchor }
-
+    
     db.collection('showlist').insertOne(addData, function(err, res) {
       db.collection('counter').updateOne({name: '게시물갯수'}, { $inc: {totalCount: 1}}, function(err, res) {
         if(err) {return console.log(err)}
@@ -151,6 +174,34 @@ app.delete('/delete', function(req, res) {
   })
   res.send();
 })
+
+app.get('/edit/:id', function(req, res) {
+  db.collection('showlist').findOne({_id: parseInt(req.params.id)}, function(err, result) {
+    if(result == null) { res.send('없는 페이지입니다') }
+    res.send(result);
+  })
+})
+
+app.put('/edit', upload.single('poster'), function(req, res) {
+  const artist = req.body.artist;
+  const location = req.body.location;
+  const date = req.body.date;
+  const time = req.body.time;
+  const seat = req.body.seat;
+  const price = req.body.price;
+  const poster = req.file == undefined ? req.body.dafaultImg : req.file.filename; // 디폴트 이미지 설정
+  const program = {artist: req.body.programArtist, title: req.body.programTitle};
+  const anchor = {artist: req.body.anchorArtist, title: req.body.anchorTitle};
+
+  db.collection('showlist').updateOne({ _id : parseInt(req.body.id) }, { $set : {artist: artist, location: location, date: date, time: time, seat: seat, price: price, poster: poster, program: program, anchor: anchor }}, function(err, result) {
+    if (err) {return console.log(err)}
+    console.log(req.body.id)
+    console.log('수정완료')
+    res.redirect('/');
+  })
+})
+
+
 
 // 리액트 라우팅 전권
 app.get('*', function (req, res) {
