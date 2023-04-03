@@ -20,6 +20,9 @@ function App() {
   let [ login, setLogin ] = useState(false);
   let [ search, setSearch ] = useState('');
   let [ searchResult, setSearchResult ] = useState([]);
+  let [ copy, setCopy ] = useState([]);
+  let [ moreCount, setMoreCount ] = useState(7);
+  let [ btnOnOff, setBtnOnOff ] = useState(true);
   
   let navigate = useNavigate();
 
@@ -29,8 +32,21 @@ function App() {
 
   useEffect(() => {
     axios.get('http://localhost:8080/showlist').then((result) => {
-      console.log(result.data);
-      setReadData(result.data)
+      // console.log(result.data.reverse());
+      setReadData(result.data);
+
+      let newArray = [];
+      for(let i = 0; i <= moreCount; i++) {
+        
+        if(result.data[i] !== undefined) {
+          newArray.push(result.data[i]);
+        }
+        setCopy(newArray);
+      }
+
+      if(result.data.length <= 8 || result.data.length <= moreCount ) {
+        setBtnOnOff(false)
+      }
     })
     .catch(() => {
       console.log('실패')
@@ -39,13 +55,13 @@ function App() {
     return () => {
       
     }
-  }, [])
+  }, [moreCount])
 
   useEffect(() => {
     axios.get('/logincheck').then((result) => {
-      console.log(result.data);
+      // console.log(result.data);
       if( result.data == 'login' ) {
-        console.log('로그인됨')
+        // console.log('로그인됨')
         setLogin(true);
       }
     })
@@ -53,6 +69,7 @@ function App() {
       console.log('로딩실패')
     }
   }, [])
+  
 
   return (
       <div className="App notosanskr">
@@ -82,8 +99,8 @@ function App() {
                     }} />
                   <button id='search' onClick={() => {
                     axios.get(`/search?value=${search}`).then((result) => {
-                      console.log(result.data);
-                      console.log(search.length)
+                      // console.log(result.data);
+                      // console.log(search.length)
                       if(search.length <= 1) {
                         alert('검색어를 두 글자 이상 입력하세요')
                         return false;
@@ -103,11 +120,19 @@ function App() {
               </span>
               <div className='card'>
                 {
-                  [...readData].slice(0).reverse().map((show, i) => {
+                  [...copy].slice(0).map((show, i) => {
                     return (
                       <Card show={show} key={show._id} login={login} />
                     )
                   })
+                }
+                {
+                  btnOnOff ?
+                    <div className='btn-more' onClick={() => {
+                      setMoreCount(moreCount + 8);
+                    }}>더보기</div>
+                  :
+                    null
                 }
               </div>
             </>

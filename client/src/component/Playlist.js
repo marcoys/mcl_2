@@ -18,7 +18,7 @@ function Playlist({ program, anchor, id, modalVisibleId ,setModalVisibleId }) {
                   return (
                     <tr key={i}>
                       <th>{program.artist[i]}</th>
-                      <td>{program.title[i]}</td>
+                      <td><a href={`https://www.youtube.com/results?search_query=${program.artist[i]}+${program.title[i]}`} target='_blank'>{program.title[i]}</a></td>
                     </tr>
                   )
                 })
@@ -34,7 +34,7 @@ function Playlist({ program, anchor, id, modalVisibleId ,setModalVisibleId }) {
                   return (
                     <tr key={i}>
                       <th>{anchor.artist[i]}</th>
-                      <td>{anchor.title[i]}</td>
+                      <td><a href={`https://www.youtube.com/results?search_query=${anchor.artist[i]}+${anchor.title[i]}`} target='_blank'>{anchor.title[i]}</a></td>
                     </tr>
                   )
                 })
