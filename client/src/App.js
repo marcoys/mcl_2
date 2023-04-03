@@ -31,7 +31,7 @@ function App() {
   }
 
   useEffect(() => {
-    axios.get('/showlist').then((result) => {
+    axios.get('http://localhost:8080/showlist').then((result) => {
       // console.log(result.data.reverse());
       setReadData(result.data);
 
@@ -120,7 +120,7 @@ function App() {
               </span>
               <div className='card'>
                 {
-                  [...copy].slice(0).map((show, i) => {
+                  [...copy].slice(0).reverse().map((show, i) => {
                     return (
                       <Card show={show} key={show._id} login={login} />
                     )
