@@ -31,7 +31,7 @@ function App() {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8080/showlist').then((result) => {
+    axios.get('/showlist').then((result) => {
       // console.log(result.data.reverse());
       setReadData(result.data);
 
