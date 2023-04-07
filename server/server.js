@@ -108,7 +108,7 @@ function 로그인했니(req, res, next) {
 
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../client/src/App.js'))
+  res.sendFile(path.join(__dirname, '/client/src/App.js'))
 });
 
 app.get('/showlist', function(req, res) {
