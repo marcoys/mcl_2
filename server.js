@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors');
 const app = express();
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
@@ -6,9 +7,10 @@ const methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 let multer = require('multer');
 app.use(express.json());
-var cors = require('cors');
-app.use(cors());
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(cors({
+  origin: '*'
+}));
+app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(express.urlencoded({extended: true}))
 require('dotenv').config();
 
@@ -26,7 +28,7 @@ MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (
 // multer 세팅
 var storage = multer.diskStorage({
   destination : function(req, file, cb) {
-    cb(null, '../client/public/images')
+    cb(null, '/client/build/images')
   },
   filename : function(req, file, cb) {
     cb(null, file.originalname);
@@ -108,13 +110,13 @@ function 로그인했니(req, res, next) {
 
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '/client/src/App.js'))
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
 });
 
 app.get('/showlist', function(req, res) {
   db.collection('showlist').find().toArray((err, result) => {
     // console.log(result);
-    res.send(result)
+    res.json(result)
   })
 });
 
@@ -165,7 +167,7 @@ app.post('/addshow', upload.single('poster'), function(req, res) {
 })
 
 app.get('/images/:imageName', function(req, res) {
-  res.sendFile(__dirname + '/images/' + req.params.imageName)
+  res.sendFile(__dirname + '/client/build/images/' + req.params.imageName)
 })
 
 app.delete('/delete', function(req, res) {
@@ -205,5 +207,5 @@ app.put('/edit', upload.single('poster'), function(req, res) {
 
 // 리액트 라우팅 전권
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });

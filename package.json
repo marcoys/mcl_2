@@ -2,7 +2,6 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "proxy": "http://localhost:8080",
   "secure": false,
   "scripts": {
