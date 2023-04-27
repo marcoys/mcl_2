@@ -27,7 +27,7 @@ function Edit() {
   const [ imgUrl, setImgUrl ] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/edit/${id}`).then((result) => {
+    axios.get(`/edit/${id}`).then((result) => {
       setSelectData(result.data);
       setArtist(result.data.artist);
       setLocation(result.data.location);
@@ -57,8 +57,8 @@ function Edit() {
     }
     reader.readAsDataURL(file);
   }
-  console.log(imgFile)
-  console.log(imgUrl)
+  // console.log(imgFile)
+  // console.log(imgUrl)
 
   let poster_preview = <img className='poster_preview' src={`/images/${poster}`}></img>;
   if(imgFile !== '') {

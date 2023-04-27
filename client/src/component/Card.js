@@ -21,15 +21,15 @@ function Card({ show, login }) {
 
   const onModalHandler = (id) => {
     setModalVisibleId(id);
-    console.log(modalVisibleId);
+
   }
 
   const deleteShow = (e) => {
     const clickId = e.currentTarget.id;
     const deletedCard = e.target.closest('ul')
-    axios.delete('http://localhost:8080/delete',{ data: { _id : clickId} }).then(() => {
-      console.log('삭제완료')
-      console.log(clickId);
+    axios.delete('/delete',{ data: { _id : clickId} }).then(() => {
+      // console.log('삭제완료')
+      // console.log(clickId);
       deletedCard.setAttribute('style', 'transition: all 0.2s; opacity: 0;')
       setTimeout(() => {
         deletedCard.setAttribute('style', 'display: none;')
@@ -76,7 +76,7 @@ function Card({ show, login }) {
             {
               login ? <div className='btn_mody' onClick={() => {navigate(`/edit/${show._id}`); }}>수정</div> : null
             }
-            {/* 수정기능 추가하기 */}
+
           </div>
           
         </li>

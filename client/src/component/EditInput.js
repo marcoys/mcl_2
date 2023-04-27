@@ -34,7 +34,7 @@ function AddInput({addOpt, artist, title }) {
     }
     setPrograms(programs.concat(program));
     nextId.current += 1;
-    console.log(programs)
+
   },[programs])
 
   // 해당 리스트 삭제

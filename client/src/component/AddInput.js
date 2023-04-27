@@ -28,7 +28,7 @@ function AddInput({addOpt}) {
     }
     setPrograms(programs.concat(program));
     nextId.current += 1;
-    console.log(programs)
+
   },[programs])
 
   const onRemove = useCallback(id => {

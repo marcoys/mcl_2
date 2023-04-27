@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors({
   origin: '*'
 }));
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(express.urlencoded({extended: true}))
 require('dotenv').config();
 
@@ -28,7 +28,7 @@ MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (
 // multer 세팅
 var storage = multer.diskStorage({
   destination : function(req, file, cb) {
-    cb(null, '/client/build/images')
+    cb(null, './client/build/images')
   },
   filename : function(req, file, cb) {
     cb(null, file.originalname);
@@ -110,7 +110,7 @@ function 로그인했니(req, res, next) {
 
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+  res.sendFile(path.join(__dirname, 'client/build/index.html'))
 });
 
 app.get('/showlist', function(req, res) {
@@ -207,5 +207,5 @@ app.put('/edit', upload.single('poster'), function(req, res) {
 
 // 리액트 라우팅 전권
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });

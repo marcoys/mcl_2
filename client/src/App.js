@@ -32,8 +32,7 @@ function App() {
 
   useEffect(() => {
     axios.get('/showlist').then((result) => {
-      // console.log(result.data.reverse());
-      setReadData(result.data);
+      setReadData(result.data.reverse());
 
       let newArray = [];
       for(let i = 0; i <= moreCount; i++) {
@@ -59,9 +58,7 @@ function App() {
 
   useEffect(() => {
     axios.get('/logincheck').then((result) => {
-      // console.log(result.data);
       if( result.data == 'login' ) {
-        // console.log('로그인됨')
         setLogin(true);
       }
     })
@@ -120,7 +117,7 @@ function App() {
               </span>
               <div className='card'>
                 {
-                  [...copy].slice(0).reverse().map((show, i) => {
+                  [...copy].slice(0).map((show, i) => {
                     return (
                       <Card show={show} key={show._id} login={login} />
                     )
