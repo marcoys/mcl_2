@@ -67,14 +67,14 @@ function Edit() {
 
   function handleBtnNext () {
     document.querySelector('.btn-next').style.display = 'none'
-    document.querySelector('.add-info').setAttribute('style', 'visibility: hidden; position: absolute;');
+    document.querySelector('.add-info').setAttribute('style', 'visibility: hidden; position: absolute; top: -100000px');
     document.querySelector('.add-program').setAttribute('style', 'left: 50%; opacity: 1;')
   }
 
   function handleBtnPrev () {
     document.querySelector('.btn-next').style.display = 'block'
     document.querySelector('.add-info').setAttribute('style', 'visibility: visible; position: relative;')
-    document.querySelector('.add-program').setAttribute('style', 'opacity: 0; visibility: hidden;')
+    document.querySelector('.add-program').setAttribute('style', 'opacity: 0; visibility: hidden; position: absolute')
   }
 
   return (
@@ -150,7 +150,7 @@ function Edit() {
           <div className='btn-next' onClick={handleBtnNext}>다음 <FontAwesomeIcon icon={faArrowRight} /></div>
         </div>
 
-        <div className='add-box add-program'>
+        <div className='add-box add-program' style={{ position: 'absolute'}}>
             <h1>프로그램 수정</h1>
             <h5>- 프로그램</h5>
             <ul>

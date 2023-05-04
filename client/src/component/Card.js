@@ -46,6 +46,7 @@ function Card({ show, login }) {
     <>
       
       <ul className={`start ${fade}`}>
+        <span>
         <li style={{
             background: `url(${process.env.PUBLIC_URL}/images/${show.poster})`,
             backgroundSize: 'cover',
@@ -53,11 +54,7 @@ function Card({ show, login }) {
           }}
         >
         </li>
-        <li style={{ position: 'absolute', right: '0', top: '0'}}>
-          {
-            login ? <FontAwesomeIcon id={show._id} icon={faCircleXmark} className='btn_list_delete' onClick={deleteShow} /> : null
-          }
-        </li>
+        
         <li>
           <div className='text-box'>
             <h2>
@@ -80,6 +77,13 @@ function Card({ show, login }) {
           </div>
           
         </li>
+
+        <li style={{ position: 'absolute', right: '0', top: '0'}}>
+          {
+            login ? <FontAwesomeIcon id={show._id} icon={faCircleXmark} className='btn_list_delete' onClick={deleteShow} /> : null
+          }
+        </li>
+        </span>
       </ul>
       <Playlist program={program} anchor={anchor} id={id} modalVisibleId={modalVisibleId} setModalVisibleId={setModalVisibleId} />
     </>
