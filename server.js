@@ -162,7 +162,8 @@ app.post('/addshow', upload.single('poster'), function(req, res) {
       })
     })
   })
-  res.write('<script>alert("ok")</script>');
+
+  res.write('<script>alert("OK")</script>');
   res.write('<script>window.location=\"/\"</script>')
 })
 
